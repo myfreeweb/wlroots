@@ -84,6 +84,7 @@ features = {
 	'systemd': false,
 	'elogind': false,
 	'libseat': false,
+	'consolekit2': false,
 	'x11-backend': false,
 	'xwayland': false,
 	'xdg-foreign': false,
