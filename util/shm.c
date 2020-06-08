@@ -1,4 +1,3 @@
-#define _POSIX_C_SOURCE 200112L
 #include <errno.h>
 #include <fcntl.h>
 #include <string.h>
@@ -21,14 +20,15 @@ static void randname(char *buf) {
 int create_shm_file(void) {
 	int retries = 100;
 	do {
-		char name[] = "/wlroots-XXXXXX";
-		randname(name + strlen(name) - 6);
+		// char name[] = "/wlroots-XXXXXX";
+		// randname(name + strlen(name) - 6);
 
 		--retries;
 		// CLOEXEC is guaranteed to be set by shm_open
-		int fd = shm_open(name, O_RDWR | O_CREAT | O_EXCL, 0600);
+		// int fd = shm_open(name, O_RDWR | O_CREAT | O_EXCL, 0600);
+		int fd = shm_open(SHM_ANON, O_RDWR | O_CREAT | O_EXCL, 0600);
 		if (fd >= 0) {
-			shm_unlink(name);
+			// shm_unlink(name);
 			return fd;
 		}
 	} while (retries > 0 && errno == EEXIST);
