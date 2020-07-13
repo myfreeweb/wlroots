@@ -54,6 +54,8 @@ static void handle_server_ready(struct wl_listener *listener, void *data) {
 		xwayland->cursor = NULL;
 	}
 
+	xwm_scale_changed(xwayland->xwm);
+
 	wlr_signal_emit_safe(&xwayland->events.ready, NULL);
 }
 

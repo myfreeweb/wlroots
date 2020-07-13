@@ -468,6 +468,8 @@ struct wlr_xwayland_server *wlr_xwayland_server_create(
 	server->wm_fd[0] = server->wm_fd[1] = -1;
 
 	server->scale = 1;
+	if (getenv("WLR_XWAYLAND_SCALE") != NULL)
+		server->scale = (int)strtol(getenv("WLR_XWAYLAND_SCALE"), NULL, 10);
 
 	wl_signal_init(&server->events.ready);
 	wl_signal_init(&server->events.destroy);
